@@ -18,7 +18,7 @@ function Navbar() {
         <img src="/movierama.svg" alt="Movierama logo" className="h-8 w-8" />
         Movierama
       </Link>
-      <ul className="fixed bottom-0 z-50 -mx-2 flex w-full justify-around gap-4 bg-gray-900/50 py-1 backdrop-blur lg:static lg:mx-8 lg:w-auto lg:gap-8">
+      <ul className="fixed inset-x-0 bottom-0 z-50 flex justify-around gap-4 bg-gray-900/50 py-1 backdrop-blur lg:static lg:mx-8 lg:w-auto lg:gap-8">
         <li className="inline-flex">
           <NavLink to="/" className="flex flex-col items-center">
             {({ isActive }) => (
