@@ -25,14 +25,16 @@ function Navbar() {
               <>
                 <span className="lg:hidden">
                   {isActive ? (
-                    <FireIconSolid className="h-8 w-8" />
+                    <FireIconSolid className="h-8 w-8 text-orange-500" />
                   ) : (
                     <FireIconOutline className="h-8 w-8" />
                   )}
                 </span>
                 <span
-                  className={`text-xs lg:text-base ${
-                    isActive ? "lg:font-extrabold" : "font-normal"
+                  className={`text-xs lg:text-lg ${
+                    isActive
+                      ? "border-orange-500 text-orange-500"
+                      : "font-normal"
                   }`}
                 >
                   Trending
@@ -47,14 +49,16 @@ function Navbar() {
               <>
                 <span className="lg:hidden">
                   {isActive ? (
-                    <HeartIconSolid className="h-8 w-8" />
+                    <HeartIconSolid className="h-8 w-8 text-orange-500" />
                   ) : (
                     <HeartIconOutline className="h-8 w-8" />
                   )}
                 </span>
                 <span
-                  className={`text-xs lg:text-base ${
-                    isActive ? "lg:font-extrabold" : "font-normal"
+                  className={`text-xs lg:text-lg ${
+                    isActive
+                      ? "border-orange-500 text-orange-500"
+                      : "font-normal"
                   }`}
                 >
                   Favorites
@@ -69,14 +73,16 @@ function Navbar() {
               <>
                 <span className="lg:hidden">
                   {isActive ? (
-                    <BookmarkIconSolid className="h-8 w-8" />
+                    <BookmarkIconSolid className="h-8 w-8 text-orange-500" />
                   ) : (
                     <BookmarkIconOutline className="h-8 w-8" />
                   )}
                 </span>
                 <span
-                  className={`text-xs lg:text-base ${
-                    isActive ? "lg:font-extrabold" : "font-normal"
+                  className={`text-xs lg:text-lg ${
+                    isActive
+                      ? "border-orange-500 text-orange-500"
+                      : "font-normal"
                   }`}
                 >
                   Watchlist
