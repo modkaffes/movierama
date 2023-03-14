@@ -18,21 +18,23 @@ function Navbar() {
         <img src="/movierama.svg" alt="Movierama logo" className="h-8 w-8" />
         Movierama
       </Link>
-      <ul className="fixed bottom-0 z-50 -mx-2 flex w-full justify-around gap-4 bg-gray-900/50 py-1 backdrop-blur lg:static lg:mx-8 lg:w-auto lg:gap-8">
+      <ul className="fixed inset-x-0 bottom-0 z-50 flex justify-around gap-4 bg-gray-900/50 py-1 backdrop-blur lg:static lg:mx-8 lg:w-auto lg:gap-8">
         <li className="inline-flex">
           <NavLink to="/" className="flex flex-col items-center">
             {({ isActive }) => (
               <>
                 <span className="lg:hidden">
                   {isActive ? (
-                    <FireIconSolid className="h-8 w-8" />
+                    <FireIconSolid className="h-8 w-8 text-orange-500" />
                   ) : (
                     <FireIconOutline className="h-8 w-8" />
                   )}
                 </span>
                 <span
-                  className={`text-xs lg:text-base ${
-                    isActive ? "lg:font-extrabold" : "font-normal"
+                  className={`text-xs lg:text-lg ${
+                    isActive
+                      ? "border-orange-500 text-orange-500"
+                      : "font-normal"
                   }`}
                 >
                   Trending
@@ -47,14 +49,16 @@ function Navbar() {
               <>
                 <span className="lg:hidden">
                   {isActive ? (
-                    <HeartIconSolid className="h-8 w-8" />
+                    <HeartIconSolid className="h-8 w-8 text-orange-500" />
                   ) : (
                     <HeartIconOutline className="h-8 w-8" />
                   )}
                 </span>
                 <span
-                  className={`text-xs lg:text-base ${
-                    isActive ? "lg:font-extrabold" : "font-normal"
+                  className={`text-xs lg:text-lg ${
+                    isActive
+                      ? "border-orange-500 text-orange-500"
+                      : "font-normal"
                   }`}
                 >
                   Favorites
@@ -69,14 +73,16 @@ function Navbar() {
               <>
                 <span className="lg:hidden">
                   {isActive ? (
-                    <BookmarkIconSolid className="h-8 w-8" />
+                    <BookmarkIconSolid className="h-8 w-8 text-orange-500" />
                   ) : (
                     <BookmarkIconOutline className="h-8 w-8" />
                   )}
                 </span>
                 <span
-                  className={`text-xs lg:text-base ${
-                    isActive ? "lg:font-extrabold" : "font-normal"
+                  className={`text-xs lg:text-lg ${
+                    isActive
+                      ? "border-orange-500 text-orange-500"
+                      : "font-normal"
                   }`}
                 >
                   Watchlist
