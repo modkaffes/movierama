@@ -2,9 +2,9 @@
 
 ## Description
 
-This is a movie exploration app. It allows you to browse movies and them to your watchlist or favorites.
+This is a movie exploration app. It allows you to browse movies and add them to your watchlist or favorites.
 
-![movierama iphone](https://user-images.githubusercontent.com/1829897/224972527-e94040aa-b9e8-4cab-a879-821370c71763.png)
+<img src="https://user-images.githubusercontent.com/1829897/224972527-e94040aa-b9e8-4cab-a879-821370c71763.png" width="390" height="844" alt="Movierama app screenshot in iPhone 12 Pro screen" />
 
 ## Technologies
 
@@ -27,6 +27,9 @@ From your command line:
 ```bash
 # Clone this repository
 $ git clone https://github.com/modkaffes/movierama.git
+
+# Copy the .env.example file to .env.development.local and add your TMDB API Token
+cp .env.example .env.development.local
 
 # Install dependencies using your favorite package manager, eg.
 $ pnpm install
