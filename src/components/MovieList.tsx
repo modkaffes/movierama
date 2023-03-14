@@ -8,10 +8,12 @@ import {
   BookmarkIcon as BookmarkIconSolid,
   HeartIcon as HeartIconSolid,
 } from "@heroicons/react/24/solid";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getSavedList, updateSavedList } from "@/api/movies";
 
 function MovieList({ movies }: { movies: Movie[] }) {
+  const queryClient = useQueryClient();
+
   const { data: favorites } = useQuery({
     queryKey: ["favorites"],
     queryFn: () => getSavedList("favorites"),
@@ -20,6 +22,12 @@ function MovieList({ movies }: { movies: Movie[] }) {
   const { data: watchlist } = useQuery({
     queryKey: ["watchlist"],
     queryFn: () => getSavedList("watchlist"),
+  });
+
+  const mutationListUpdate = useMutation({
+    mutationFn: updateSavedList,
+    onSuccess: (_, { list }) =>
+      queryClient.invalidateQueries({ queryKey: [list] }),
   });
 
   // Add information about whether the movie is in the favorites or watchlist
@@ -51,7 +59,7 @@ function MovieList({ movies }: { movies: Movie[] }) {
               <ArrowsPointingOutIcon className="h-6 w-6" />
             </div>
           </NavLink>
-          <div className="absolute top-1 right-1 hidden justify-between rounded bg-gray-900/90 p-1 group-hover:flex ">
+          <div className="absolute top-1 right-1 hidden justify-between rounded bg-gray-900/90 p-1 group-hover:flex">
             <button
               name="favorite"
               value={movie.isInFavorites ? "true" : "false"}
@@ -60,9 +68,9 @@ function MovieList({ movies }: { movies: Movie[] }) {
                   ? "Remove from favorites"
                   : "Add to favorites"
               }
-              onClick={() => {
-                updateSavedList("favorites", movie);
-              }}
+              onClick={() =>
+                mutationListUpdate.mutate({ list: "favorites", movie })
+              }
               className="p-1"
             >
               {movie.isInFavorites ? (
@@ -72,9 +80,9 @@ function MovieList({ movies }: { movies: Movie[] }) {
               )}
             </button>
             <button
-              onClick={() => {
-                updateSavedList("watchlist", movie);
-              }}
+              onClick={() =>
+                mutationListUpdate.mutate({ list: "watchlist", movie })
+              }
               className="p-1"
             >
               {movie.isInWatchlist ? (
