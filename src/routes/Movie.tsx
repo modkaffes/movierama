@@ -40,6 +40,7 @@ function Movie() {
               <span className="ml-2">
                 {movie.release_date && `(${movie.release_date.slice(0, 4)})`}
               </span>
+              <em className="block text-sm">{movie.tagline}</em>
               <p className="mt-4">{movie.overview}</p>
             </div>
             {movieVideos?.results.length > 0 && (

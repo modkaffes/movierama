@@ -3,6 +3,7 @@ type TMDBMovie = {
   title: string;
   poster_path: string;
   release_date: string;
+  tagline: string;
 };
 
 interface Movie extends TMDBMovie {
