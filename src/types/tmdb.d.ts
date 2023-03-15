@@ -11,6 +11,8 @@ interface Movie extends TMDBMovie {
   isInWatchlist?: boolean;
 }
 
+type List = "favorites" | "watchlist";
+
 type Video = {
   id: string;
   key: string;

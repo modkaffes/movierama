@@ -37,10 +37,12 @@ export async function getSavedList(list: "favorites" | "watchlist") {
   return savedList;
 }
 
-export async function updateSavedList(
-  list: "favorites" | "watchlist",
-  movie: Movie
-) {
+export type updateSavedListParams = {
+  list: List;
+  movie: Movie;
+};
+
+export async function updateSavedList({ list, movie }: updateSavedListParams) {
   const savedList: Movie[] | [] | null = await localforage.getItem(list);
 
   if (savedList && savedList?.findIndex((m) => m.id === movie.id) > -1) {
