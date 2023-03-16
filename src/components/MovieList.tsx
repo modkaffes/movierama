@@ -31,16 +31,15 @@ function MovieList({ movies }: { movies: Movie[] }) {
   });
 
   // Add information about whether the movie is in the favorites or watchlist
-  const moviesWithListInfo = movies.map((movie) => {
-    movie.isInFavorites = favorites?.some(
+  const moviesWithListInfo = movies.map((movie) => ({
+    ...movie,
+    isInFavorites: favorites?.some(
       (favorite: Movie) => favorite.id === movie.id
-    );
-    movie.isInWatchlist = watchlist?.some(
+    ),
+    isInWatchlist: watchlist?.some(
       (watchlistItem: Movie) => watchlistItem.id === movie.id
-    );
-
-    return movie;
-  });
+    ),
+  }));
 
   return (
     <ul className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-4 md:grid-cols-5">
