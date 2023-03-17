@@ -10,7 +10,7 @@ function Searchbar() {
 
   const { data } = useQuery({
     queryKey: ["movies", "search", debouncedQuery],
-    queryFn: () => searchMovies(debouncedQuery),
+    queryFn: () => debouncedQuery && searchMovies(debouncedQuery),
   });
 
   // Focus on search input when pressing ctrl + k
