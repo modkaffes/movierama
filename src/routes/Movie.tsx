@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { getMovie, getMovieVideos } from "@/api/movies";
+import { getMovie, getMovieVideos, getSavedList } from "@/api/movies";
+import ListUpdateActions from "@/components/ListUpdateActions";
 
 function Movie() {
   const params = useParams();
@@ -11,14 +12,34 @@ function Movie() {
     queryFn: () => getMovie(Number(movieId)),
   });
 
+  const { data: favorites } = useQuery({
+    queryKey: ["favorites"],
+    queryFn: () => getSavedList("favorites"),
+  });
+
+  const { data: watchlist } = useQuery({
+    queryKey: ["watchlist"],
+    queryFn: () => getSavedList("watchlist"),
+  });
+
   const { data: movieVideos } = useQuery({
     queryKey: ["movies", movieId, "videos"],
     queryFn: () => getMovieVideos(Number(movieId)),
   });
 
+  const movieWithListInfo = {
+    ...movie,
+    isInFavorites: favorites?.find(
+      (favorite: Movie) => favorite.id === Number(movieId)
+    ),
+    isInWatchlist: watchlist?.find(
+      (watchlistItem: Movie) => watchlistItem.id === Number(movieId)
+    ),
+  };
+
   return (
     <>
-      {movie && (
+      {movieWithListInfo && (
         <div
           className="flex flex-col gap-4 rounded-lg bg-cover bg-center bg-no-repeat p-4 text-white md:flex-row md:gap-8 md:p-8"
           style={{
@@ -40,8 +61,18 @@ function Movie() {
               <span className="ml-2">
                 {movie.release_date && `(${movie.release_date.slice(0, 4)})`}
               </span>
-              <em className="block text-sm">{movie.tagline}</em>
+              {movie.tagline && (
+                <span className="block text-sm italic">{movie.tagline}</span>
+              )}
               <p className="mt-4">{movie.overview}</p>
+              <div className="mt-8 flex flex-col gap-4 lg:flex-row lg:gap-8">
+                <ListUpdateActions
+                  movie={movieWithListInfo}
+                  isInFavorites={movieWithListInfo.isInFavorites}
+                  isInWatchlist={movieWithListInfo.isInWatchlist}
+                  withText={true}
+                />
+              </div>
             </div>
             {movieVideos?.results.length > 0 && (
               <div className="mt-8">
