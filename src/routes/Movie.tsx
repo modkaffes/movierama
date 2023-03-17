@@ -1,15 +1,17 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { getMovie, getMovieVideos, getSavedList } from "@/api/movies";
+import { getMovie, getSavedList } from "@/api/movies";
 import ListUpdateActions from "@/components/ListUpdateActions";
+import Trailer from "@/components/Trailer";
 
 function Movie() {
   const params = useParams();
   const { movieId } = params;
+  const movieIdNo = Number(movieId);
 
   const { data: movie } = useQuery({
-    queryKey: ["movies", movieId],
-    queryFn: () => getMovie(Number(movieId)),
+    queryKey: ["movie", movieIdNo],
+    queryFn: () => getMovie(movieIdNo),
   });
 
   const { data: favorites } = useQuery({
@@ -22,18 +24,13 @@ function Movie() {
     queryFn: () => getSavedList("watchlist"),
   });
 
-  const { data: movieVideos } = useQuery({
-    queryKey: ["movies", movieId, "videos"],
-    queryFn: () => getMovieVideos(Number(movieId)),
-  });
-
   const movieWithListInfo = movie && {
     ...movie,
     isInFavorites: favorites?.find(
-      (favorite: Movie) => favorite.id === Number(movieId)
+      (favorite: Movie) => favorite.id === movieIdNo
     ),
     isInWatchlist: watchlist?.find(
-      (watchlistItem: Movie) => watchlistItem.id === Number(movieId)
+      (watchlistItem: Movie) => watchlistItem.id === movieIdNo
     ),
   };
 
@@ -41,9 +38,9 @@ function Movie() {
     <>
       {movieWithListInfo && (
         <div
-          className="flex flex-col gap-4 rounded-lg bg-cover bg-center bg-no-repeat p-4 text-white md:flex-row md:gap-8 md:p-8"
+          className="flex flex-col gap-4 rounded-lg bg-cover bg-center bg-no-repeat p-4 text-white lg:flex-row lg:gap-8 lg:p-8"
           style={{
-            backgroundImage: `linear-gradient(#000, rgba(0, 0, 0, 0.5)), url(${
+            backgroundImage: `linear-gradient(#000, rgba(0, 0, 0, 0.75)), url(${
               import.meta.env.VITE_IMG_URL
             }/w1280/${movie.backdrop_path})`,
           }}
@@ -74,29 +71,7 @@ function Movie() {
                 />
               </div>
             </div>
-            {movieVideos?.results.length > 0 && (
-              <div className="mt-8">
-                <h2 className="text-lg font-bold">Trailer</h2>
-                <ul className="mt-2 flex flex-wrap gap-4">
-                  {movieVideos.results.map((video: Video) => {
-                    if (video.type === "Trailer") {
-                      return (
-                        <li
-                          key={video.id}
-                          className="overflow-hidden rounded-md"
-                        >
-                          <iframe
-                            title={video.name}
-                            src={`https://www.youtube-nocookie.com/embed/${video.key}`}
-                            allowFullScreen
-                          />
-                        </li>
-                      );
-                    }
-                  })}
-                </ul>
-              </div>
-            )}
+            <Trailer movieId={Number(movieId)} />
           </div>
         </div>
       )}
