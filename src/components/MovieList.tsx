@@ -1,18 +1,9 @@
 import { NavLink } from "react-router-dom";
-import {
-  BookmarkIcon as BookmarkIconOutline,
-  HeartIcon as HeartIconOutline,
-} from "@heroicons/react/24/outline";
-import {
-  BookmarkIcon as BookmarkIconSolid,
-  HeartIcon as HeartIconSolid,
-} from "@heroicons/react/24/solid";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getSavedList, updateSavedList } from "@/api/movies";
+import { useQuery } from "@tanstack/react-query";
+import { getSavedList } from "@/api/movies";
+import ListUpdateActions from "@/components/ListUpdateActions";
 
 function MovieList({ movies }: { movies: Movie[] }) {
-  const queryClient = useQueryClient();
-
   const { data: favorites } = useQuery({
     queryKey: ["favorites"],
     queryFn: () => getSavedList("favorites"),
@@ -21,12 +12,6 @@ function MovieList({ movies }: { movies: Movie[] }) {
   const { data: watchlist } = useQuery({
     queryKey: ["watchlist"],
     queryFn: () => getSavedList("watchlist"),
-  });
-
-  const mutationListUpdate = useMutation({
-    mutationFn: updateSavedList,
-    onSuccess: (_, { list }) =>
-      queryClient.invalidateQueries({ queryKey: [list] }),
   });
 
   // Add information about whether the movie is in the favorites or watchlist
@@ -52,37 +37,11 @@ function MovieList({ movies }: { movies: Movie[] }) {
             />
           </NavLink>
           <div className="absolute top-1 right-1 hidden justify-between rounded bg-gray-900/90 p-1 group-hover:flex">
-            <button
-              name="favorite"
-              value={movie.isInFavorites ? "true" : "false"}
-              aria-label={
-                movie.isInFavorites
-                  ? "Remove from favorites"
-                  : "Add to favorites"
-              }
-              onClick={() =>
-                mutationListUpdate.mutate({ list: "favorites", movie })
-              }
-              className="p-1"
-            >
-              {movie.isInFavorites ? (
-                <HeartIconSolid className="h-6 w-6 text-pink-400" />
-              ) : (
-                <HeartIconOutline className="h-6 w-6 text-pink-400" />
-              )}
-            </button>
-            <button
-              onClick={() =>
-                mutationListUpdate.mutate({ list: "watchlist", movie })
-              }
-              className="p-1"
-            >
-              {movie.isInWatchlist ? (
-                <BookmarkIconSolid className="h-6 w-6 text-yellow-400" />
-              ) : (
-                <BookmarkIconOutline className="h-6 w-6 text-yellow-400" />
-              )}
-            </button>
+            <ListUpdateActions
+              movie={movie}
+              isInFavorites={movie.isInFavorites}
+              isInWatchlist={movie.isInWatchlist}
+            />
           </div>
           <div className="absolute bottom-0 m-1 hidden rounded bg-gray-900/90 p-1 text-sm group-hover:block">
             {movie.title}{" "}
