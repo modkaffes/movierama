@@ -35,6 +35,10 @@ function MovieList({ movies }: { movies: Movie[] }) {
               src={`${import.meta.env.VITE_IMG_URL}/w500/${movie.poster_path}`}
               alt={`Poster for ${movie.title}`}
             />
+            <div className="absolute bottom-0 m-1 hidden rounded bg-gray-900/90 p-1 text-sm group-hover:block">
+              {movie.title}{" "}
+              {movie.release_date && `(${movie.release_date.slice(0, 4)})`}
+            </div>
           </NavLink>
           <div className="absolute top-1 right-1 hidden justify-between rounded bg-gray-900/90 p-1 group-hover:flex">
             <ListUpdateActions
@@ -42,10 +46,6 @@ function MovieList({ movies }: { movies: Movie[] }) {
               isInFavorites={movie.isInFavorites}
               isInWatchlist={movie.isInWatchlist}
             />
-          </div>
-          <div className="absolute bottom-0 m-1 hidden rounded bg-gray-900/90 p-1 text-sm group-hover:block">
-            {movie.title}{" "}
-            {movie.release_date && `(${movie.release_date.slice(0, 4)})`}
           </div>
         </li>
       ))}
