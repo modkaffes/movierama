@@ -27,7 +27,7 @@ function Movie() {
     queryFn: () => getMovieVideos(Number(movieId)),
   });
 
-  const movieWithListInfo = {
+  const movieWithListInfo = movie && {
     ...movie,
     isInFavorites: favorites?.find(
       (favorite: Movie) => favorite.id === Number(movieId)
