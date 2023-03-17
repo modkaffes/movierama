@@ -11,7 +11,14 @@ import Trending from "@/routes/Trending";
 import Watchlist from "@/routes/Watchlist";
 import "@/styles/index.css";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      suspense: true,
+    },
+  },
+});
 
 const router = createBrowserRouter([
   {
