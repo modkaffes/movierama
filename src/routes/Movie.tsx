@@ -61,7 +61,9 @@ function Movie() {
               <span className="ml-2">
                 {movie.release_date && `(${movie.release_date.slice(0, 4)})`}
               </span>
-              <em className="block text-sm">{movie.tagline}</em>
+              {movie.tagline && (
+                <span className="block text-sm italic">{movie.tagline}</span>
+              )}
               <p className="mt-4">{movie.overview}</p>
               <div className="mt-8 flex flex-col gap-4 lg:flex-row lg:gap-8">
                 <ListUpdateActions
