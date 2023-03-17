@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 import {
-  ArrowsPointingOutIcon,
   BookmarkIcon as BookmarkIconOutline,
   HeartIcon as HeartIconOutline,
 } from "@heroicons/react/24/outline";
@@ -45,18 +44,12 @@ function MovieList({ movies }: { movies: Movie[] }) {
     <ul className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-4 md:grid-cols-5">
       {moviesWithListInfo.map((movie) => (
         <li key={movie.id} className="group relative">
-          <NavLink
-            to={`/movies/${movie.id}`}
-            className="flex items-center justify-center"
-          >
+          <NavLink to={`/movies/${movie.id}`}>
             <img
               className="rounded-md"
               src={`${import.meta.env.VITE_IMG_URL}/w500/${movie.poster_path}`}
               alt={`Poster for ${movie.title}`}
             />
-            <div className="absolute hidden rounded bg-gray-900/90 p-1 group-hover:block">
-              <ArrowsPointingOutIcon className="h-6 w-6" />
-            </div>
           </NavLink>
           <div className="absolute top-1 right-1 hidden justify-between rounded bg-gray-900/90 p-1 group-hover:flex">
             <button
