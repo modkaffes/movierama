@@ -8,7 +8,7 @@ function Searchbar() {
   const [query, setQuery] = useState<string>();
   const [debouncedQuery] = useDebouncedValue(query, 250);
 
-  const { data } = useSearchMovies(debouncedQuery);
+  const { data: search } = useSearchMovies(debouncedQuery);
 
   return (
     <div className="relative flex min-w-[340px] items-center md:ml-auto">
@@ -35,9 +35,9 @@ function Searchbar() {
           onChange={(event) => setQuery(event.target.value)}
         />
       </form>
-      {debouncedQuery && data?.results.length > 0 && (
+      {debouncedQuery && search && search.results.length > 0 && (
         <ul className="absolute top-full z-50 flex max-h-[600px] w-full flex-col divide-y overflow-y-auto rounded-md border border-gray-700 bg-gray-800 text-sm">
-          {data.results?.map((movie: Movie) => (
+          {search.results.map((movie: Movie) => (
             <li key={movie.id} className="border-gray-900">
               <NavLink
                 to={`/movies/${movie.id}`}
@@ -66,8 +66,8 @@ function Searchbar() {
           ))}
         </ul>
       )}
-      {debouncedQuery && data?.results.length === 0 && (
-        <div className="absolute top-full w-full rounded-md border border-gray-700 p-4 text-sm">
+      {debouncedQuery && search && search.results.length === 0 && (
+        <div className="absolute top-full w-full rounded-md border border-gray-700 bg-gray-800 p-4 text-sm">
           <p>No movies found with this title</p>
         </div>
       )}

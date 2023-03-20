@@ -12,19 +12,16 @@ function Movie() {
   const { data: favorites } = useSavedList("favorites");
   const { data: watchlist } = useSavedList("watchlist");
 
-  const movieWithListInfo = movie && {
-    ...movie,
-    isInFavorites: favorites?.find(
-      (favorite: Movie) => favorite.id === movieIdNo
-    ),
-    isInWatchlist: watchlist?.find(
-      (watchlistItem: Movie) => watchlistItem.id === movieIdNo
-    ),
-  };
+  const isInFavorites = favorites?.find(
+    (favorite) => favorite.id === movieIdNo
+  );
+  const isInWatchlist = watchlist?.find(
+    (watchlistItem) => watchlistItem.id === movieIdNo
+  );
 
   return (
     <>
-      {movieWithListInfo && (
+      {movie && (
         <div
           className="flex flex-col gap-4 rounded-lg bg-cover bg-center bg-no-repeat p-4 text-white lg:flex-row lg:gap-8 lg:p-8"
           style={{
@@ -52,9 +49,9 @@ function Movie() {
               <p className="mt-4">{movie.overview}</p>
               <div className="mt-8 flex flex-col gap-4 lg:flex-row lg:gap-8">
                 <ListUpdateActions
-                  movie={movieWithListInfo}
-                  isInFavorites={movieWithListInfo.isInFavorites}
-                  isInWatchlist={movieWithListInfo.isInWatchlist}
+                  movie={movie}
+                  isInFavorites={!!isInFavorites}
+                  isInWatchlist={!!isInWatchlist}
                   withText={true}
                 />
               </div>
