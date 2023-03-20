@@ -1,11 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
-import { getMovieVideos } from "@/api/movies";
+import { useMovieVideos } from "@/services/hooks/useMovies";
 
 function Trailer({ movieId }: { movieId: Movie["id"] }) {
-  const { data: movieVideos } = useQuery({
-    queryKey: ["movies", movieId, "videos"],
-    queryFn: () => getMovieVideos(Number(movieId)),
-  });
+  const { data: movieVideos } = useMovieVideos(Number(movieId));
 
   const latestTrailer = movieVideos?.results.find(
     (video: Video) => video.type === "Trailer"

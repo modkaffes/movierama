@@ -8,7 +8,7 @@ import {
 } from "@heroicons/react/24/solid";
 import { useMutation } from "@tanstack/react-query";
 import { useQueryClient } from "@tanstack/react-query";
-import { updateSavedList } from "@/api/movies";
+import { updateSavedList } from "@/services/hooks/useMovies";
 
 function ListUpdateActions({
   isInFavorites,

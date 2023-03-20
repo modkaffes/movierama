@@ -1,18 +1,10 @@
 import { NavLink } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { getSavedList } from "@/api/movies";
 import ListUpdateActions from "@/components/ListUpdateActions";
+import { useSavedList } from "@/services/hooks/useMovies";
 
 function MovieList({ movies }: { movies: Movie[] }) {
-  const { data: favorites } = useQuery({
-    queryKey: ["favorites"],
-    queryFn: () => getSavedList("favorites"),
-  });
-
-  const { data: watchlist } = useQuery({
-    queryKey: ["watchlist"],
-    queryFn: () => getSavedList("watchlist"),
-  });
+  const { data: favorites } = useSavedList("favorites");
+  const { data: watchlist } = useSavedList("watchlist");
 
   // Add information about whether the movie is in the favorites or watchlist
   const moviesWithListInfo = movies.map((movie) => ({

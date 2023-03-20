@@ -1,28 +1,16 @@
 import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { getMovie, getSavedList } from "@/api/movies";
 import ListUpdateActions from "@/components/ListUpdateActions";
 import Trailer from "@/components/Trailer";
+import { useMovie, useSavedList } from "@/services/hooks/useMovies";
 
 function Movie() {
   const params = useParams();
   const { movieId } = params;
   const movieIdNo = Number(movieId);
 
-  const { data: movie } = useQuery({
-    queryKey: ["movie", movieIdNo],
-    queryFn: () => getMovie(movieIdNo),
-  });
-
-  const { data: favorites } = useQuery({
-    queryKey: ["favorites"],
-    queryFn: () => getSavedList("favorites"),
-  });
-
-  const { data: watchlist } = useQuery({
-    queryKey: ["watchlist"],
-    queryFn: () => getSavedList("watchlist"),
-  });
+  const { data: movie } = useMovie(movieIdNo);
+  const { data: favorites } = useSavedList("favorites");
+  const { data: watchlist } = useSavedList("watchlist");
 
   const movieWithListInfo = movie && {
     ...movie,

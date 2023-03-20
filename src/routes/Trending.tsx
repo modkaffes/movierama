@@ -1,12 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
-import { getTrendingMovies } from "@/api/movies";
 import MovieList from "@/components/MovieList";
+import { useTrendingMovies } from "@/services/hooks/useMovies";
 
 function Trending() {
-  const { data: trendingMovies } = useQuery({
-    queryKey: ["movies", "trending", "week"],
-    queryFn: getTrendingMovies,
-  });
+  const { data: trendingMovies } = useTrendingMovies();
 
   return (
     <div>

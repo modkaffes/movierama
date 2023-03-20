@@ -1,13 +1,9 @@
 import { NavLink } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { getSavedList } from "@/api/movies";
 import MovieList from "@/components/MovieList";
+import { useSavedList } from "@/services/hooks/useMovies";
 
 function Favorites() {
-  const { data: favorites } = useQuery({
-    queryKey: ["favorites"],
-    queryFn: () => getSavedList("favorites"),
-  });
+  const { data: favorites } = useSavedList("favorites");
 
   return (
     <div>

@@ -1,13 +1,9 @@
 import { NavLink } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { getSavedList } from "@/api/movies";
 import MovieList from "@/components/MovieList";
+import { useSavedList } from "@/services/hooks/useMovies";
 
 function Watchlist() {
-  const { data: watchlist } = useQuery({
-    queryKey: ["watchlist"],
-    queryFn: () => getSavedList("watchlist"),
-  });
+  const { data: watchlist } = useSavedList("watchlist");
 
   return (
     <div>

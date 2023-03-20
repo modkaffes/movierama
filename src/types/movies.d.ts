@@ -1,6 +1,7 @@
 type TMDBMovie = {
   id: number;
   title: string;
+  backdrop_path: string;
   poster_path: string;
   release_date: string;
   tagline: string;
