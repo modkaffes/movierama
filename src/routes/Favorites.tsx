@@ -8,7 +8,7 @@ function Favorites() {
   return (
     <div>
       <h2 className="text-xl font-bold">Your favorite movies</h2>
-      {favorites && favorites?.length > 0 ? (
+      {favorites && favorites.length > 0 ? (
         <MovieList movies={favorites} />
       ) : (
         <p className="mt-2">

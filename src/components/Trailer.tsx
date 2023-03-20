@@ -4,7 +4,7 @@ function Trailer({ movieId }: { movieId: Movie["id"] }) {
   const { data: movieVideos } = useMovieVideos(Number(movieId));
 
   const latestTrailer = movieVideos?.results.find(
-    (video: Video) => video.type === "Trailer"
+    (video) => video.type === "Trailer"
   );
 
   return latestTrailer ? (

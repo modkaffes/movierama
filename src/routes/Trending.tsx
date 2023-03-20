@@ -7,7 +7,7 @@ function Trending() {
   return (
     <div>
       <h2 className="text-xl font-bold">Movies trending today</h2>
-      {trendingMovies?.results.length > 0 ? (
+      {trendingMovies && trendingMovies.results.length > 0 ? (
         <MovieList movies={trendingMovies.results} />
       ) : (
         <p>No trending movies</p>

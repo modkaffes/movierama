@@ -9,11 +9,9 @@ function MovieList({ movies }: { movies: Movie[] }) {
   // Add information about whether the movie is in the favorites or watchlist
   const moviesWithListInfo = movies.map((movie) => ({
     ...movie,
-    isInFavorites: favorites?.some(
-      (favorite: Movie) => favorite.id === movie.id
-    ),
+    isInFavorites: favorites?.some((favorite) => favorite.id === movie.id),
     isInWatchlist: watchlist?.some(
-      (watchlistItem: Movie) => watchlistItem.id === movie.id
+      (watchlistItem) => watchlistItem.id === movie.id
     ),
   }));
 
