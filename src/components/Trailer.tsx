@@ -12,6 +12,7 @@ function Trailer({ movieId }: { movieId: Movie["id"] }) {
       <h2 className="text-lg font-bold">Trailer</h2>
       <div className="mt-2 overflow-hidden rounded-md">
         <iframe
+          data-testid="iframe"
           title={latestTrailer.name}
           src={`https://www.youtube-nocookie.com/embed/${latestTrailer.key}`}
           allowFullScreen
