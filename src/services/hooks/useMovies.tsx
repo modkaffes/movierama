@@ -3,7 +3,7 @@ import { api } from "@/services/api";
 import localforage from "localforage";
 
 export async function getTrendingMovies() {
-  const { data } = await api.get("/trending/movie/day");
+  const { data } = await api.get<MoviesResponse>("/trending/movie/day");
 
   return data;
 }
@@ -18,7 +18,7 @@ export function useTrendingMovies() {
 export async function searchMovies(query?: string) {
   if (!query) return Promise.resolve({ results: [] });
 
-  const { data } = await api.get(
+  const { data } = await api.get<MoviesResponse>(
     `/search/movie?query=${encodeURIComponent(query)}`
   );
 
@@ -34,7 +34,7 @@ export function useSearchMovies(query?: string) {
 }
 
 export async function getMovie(id: number) {
-  const { data } = await api.get(`/movie/${id}`);
+  const { data } = await api.get<Movie>(`/movie/${id}`);
 
   return data;
 }
@@ -60,7 +60,7 @@ export function useSavedList(list: "favorites" | "watchlist") {
 }
 
 export async function getMovieVideos(id: number) {
-  const { data } = await api.get(`/movie/${id}/videos`);
+  const { data } = await api.get<VideosResponse>(`/movie/${id}/videos`);
 
   return data;
 }

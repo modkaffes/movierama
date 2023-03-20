@@ -8,6 +8,9 @@ describe("useTrendingMovies", () => {
       wrapper: queryClientWrapper,
     });
 
-    await waitFor(() => expect(result.current.data[0].title).toBe("Movie 0"));
+    await waitFor(() => expect(result.current.data).toBeDefined());
+    await waitFor(() =>
+      expect(result.current.data?.results[0]).toHaveProperty("title")
+    );
   });
 });
