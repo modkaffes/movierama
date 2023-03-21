@@ -12,9 +12,8 @@ function Favorites() {
         <MovieList movies={favorites} />
       ) : (
         <p className="mt-2">
-          You don’t have any favorite movies yet.{" "}
-          <span className="hidden lg:inline">Press Ctrl + K to search</span>
-          <span className="lg:hidden">Search above</span> or find one in the{" "}
+          You don’t have any favorite movies yet. Search above or find one in
+          the{" "}
           <NavLink to="/" className="font-bold underline">
             trending
           </NavLink>{" "}

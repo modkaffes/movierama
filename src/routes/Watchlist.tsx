@@ -12,9 +12,8 @@ function Watchlist() {
         <MovieList movies={watchlist} />
       ) : (
         <p className="mt-2">
-          You don’t have any movies yet in your watchlist.{" "}
-          <span className="hidden lg:inline">Press Ctrl + K to search</span>
-          <span className="lg:hidden">Search above</span> or find one in the{" "}
+          You don’t have any movies yet in your watchlist. Search above or find
+          one in the{" "}
           <NavLink to="/" className="font-bold underline">
             trending
           </NavLink>{" "}
