@@ -25,12 +25,12 @@ function MovieList({ movies }: { movies: Movie[] }) {
               src={`${import.meta.env.VITE_IMG_URL}/w500/${movie.poster_path}`}
               alt={`Poster for ${movie.title}`}
             />
-            <div className="absolute bottom-0 m-1 hidden rounded bg-gray-900/90 p-1 text-sm group-hover:block">
+            <div className="absolute bottom-0 m-1 hidden rounded bg-gray-900/90 p-1 text-sm md:group-hover:block">
               {movie.title}{" "}
               {movie.release_date && `(${movie.release_date.slice(0, 4)})`}
             </div>
           </NavLink>
-          <div className="absolute top-1 right-1 hidden justify-between rounded bg-gray-900/90 p-1 group-hover:flex">
+          <div className="absolute top-1 right-1 hidden justify-between rounded bg-gray-900/90 p-1 md:group-hover:flex">
             <ListUpdateActions
               movie={movie}
               isInFavorites={movie.isInFavorites}
